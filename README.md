@@ -65,9 +65,10 @@ this project now includes a Vercel-compatible Python entrypoint:
 
 ### Vercel routes
 
-- `GET /` -> service status
+- `GET /` -> interactive web UI
 - `GET /health` -> health check
 - `POST /scout` -> run the talent scouting pipeline
+- `POST /api/scout` -> alias for `/scout`
 
 Example payload:
 
@@ -82,7 +83,7 @@ Example payload:
 }
 ```
 
-Note: Streamlit UI (`app.py`) is for local app runtime. On Vercel, use `server.py` as the backend entrypoint.
+Note: Streamlit UI (`app.py`) is for local app runtime. On Vercel, `server.py` now serves both the deployed UI and API endpoints.
 
 ## How to Use
 
