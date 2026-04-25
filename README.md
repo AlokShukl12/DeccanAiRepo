@@ -51,6 +51,39 @@ streamlit run app.py
 
 4. Open the local URL printed by Streamlit.
 
+## Vercel Deployment Fix
+
+If Vercel shows:
+`No python entrypoint found...`
+
+this project now includes a Vercel-compatible Python entrypoint:
+
+- `server.py` exports `app = FastAPI(...)`
+- `pyproject.toml` includes:
+  - `[project.scripts]`
+  - `app = "server:app"`
+
+### Vercel routes
+
+- `GET /` -> service status
+- `GET /health` -> health check
+- `POST /scout` -> run the talent scouting pipeline
+
+Example payload:
+
+```json
+{
+  "jd_text": "Senior AI Engineer ...",
+  "pool_size": 12,
+  "shortlist_size": 8,
+  "match_weight": 0.65,
+  "interest_weight": 0.35,
+  "outreach_tone": "consultative"
+}
+```
+
+Note: Streamlit UI (`app.py`) is for local app runtime. On Vercel, use `server.py` as the backend entrypoint.
+
 ## How to Use
 
 1. Paste a JD in the text box or click `Load Sample JD`.
